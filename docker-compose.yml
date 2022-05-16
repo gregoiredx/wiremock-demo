@@ -1,0 +1,8 @@
+services:
+  external-service:
+    image: wiremock/wiremock:2.33.2
+    command: "--port 80 --verbose"
+    volumes:
+      - "./tests/stubs/external-service:/home/wiremock/mappings:ro"
+  curl:
+    image: curlimages/curl:7.83.1

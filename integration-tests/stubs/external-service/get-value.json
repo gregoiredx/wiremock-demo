@@ -1,0 +1,13 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/get-value"
+    },
+    "response": {
+        "status": 200,
+        "jsonBody": {
+            "value": 3
+        }
+    }
+
+}

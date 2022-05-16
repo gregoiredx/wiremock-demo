@@ -3,6 +3,17 @@ services:
     image: wiremock/wiremock:2.33.2
     command: "--port 80 --verbose"
     volumes:
-      - "./tests/stubs/external-service:/home/wiremock/mappings:ro"
-  curl:
-    image: curlimages/curl:7.83.1
+      - "./integration-tests/stubs/external-service:/home/wiremock/mappings:ro"
+  my-service:
+    build:
+      context: .
+    environment:
+      - "EXTERNAL_SERVICE_URL=http://external-service"
+  integration-tests:
+    build:
+      context: ./integration-tests
+    environment:
+      - "MY_SERVICE_URL=http://my-service"
+    depends_on:
+      - external-service
+      - my-service

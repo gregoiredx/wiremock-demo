@@ -6,3 +6,9 @@ services:
       - "./tests/stubs/external-service:/home/wiremock/mappings:ro"
   curl:
     image: curlimages/curl:7.83.1
+  my-service:
+    build: 
+      context: .
+  integration-tests:
+    build: 
+      context: ./tests/integration-tests

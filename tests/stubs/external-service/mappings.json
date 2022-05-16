@@ -3,30 +3,15 @@
         {
             "request": {
                 "method": "GET",
-                "url": "/my-account"
-            },
-            "response": {
-                "status": 401
-            }
- 
-        },
-        {
-            "request": {
-                "method": "GET",
-                "url": "/my-account",
-                "headers": {
-                    "Authorization": {
-                        "equalTo": "Bearer a.valid.token"
-                    }
-                }
+                "url": "/get-value"
             },
             "response": {
                 "status": 200,
                 "jsonBody": {
-                    "firstName": "John",
-                    "lastName": "Doe"
+                    "value": 3
                 }
             }
+ 
         }
     ]
 }

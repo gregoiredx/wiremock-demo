@@ -16,6 +16,16 @@ def test_my_service():
     assert response.status_code == 200
     assert response.json()["result"] == 9
 
+def test_my_service_handles_external_service_downtimes():
+    set_external_service_response({"fault": "CONNECTION_RESET_BY_PEER"})
+    my_service_factor = 3
+
+    response = requests.get(
+        f"{MY_SERVICE_URL}/multiply-external-service?factor={my_service_factor}"
+    )
+
+    assert response.status_code == 200
+    assert response.json()["result"] == 3
 
 def set_external_service_response(response):
     response = requests.post(

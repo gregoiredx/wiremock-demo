@@ -1,0 +1,18 @@
+version: 2.1
+
+jobs:
+  integration-tests:
+    docker:
+      - image: cimg/base:2021.11
+    resource_class: small
+    steps:
+      - setup_remote_docker:
+          version: 20.10.14
+      - checkout
+      - run: make integration-tests
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - integration-tests

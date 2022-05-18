@@ -2,6 +2,9 @@ services:
   external-service:
     image: wiremock/wiremock:2.33.2
     command: "--port 80 --verbose"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/__admin/mappings"]
+      interval: 1s
   my-service:
     build: 
       context: .
@@ -14,5 +17,7 @@ services:
       - "MY_SERVICE_URL=http://my-service"
       - "EXTERNAL_SERVICE_URL=http://external-service"
     depends_on:
-      - external-service
-      - my-service
+      external-service:
+        condition: service_healthy
+      my-service:
+        condition: service_started
